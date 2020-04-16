@@ -1,0 +1,24 @@
+<div class='block-ext' (click)='open = !open' *ngIf="open">
+  <div class="block-int text-center">
+    <div class="card" style="width: 90%;">
+      <div class="card-body">
+        <h5 class="card-title">Position : [ {{test.lat}} , {{test.lon}} ]</h5>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col" >**</th>
+
+              <th *ngFor="let date of test.dates">{{date.date | date}}</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let type of listType">
+            <tr>
+              <th scope="row" >{{type.label}}</th>
+              <td *ngFor="let date of test.dates">{{getValue(date, type)}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

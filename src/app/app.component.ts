@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from './services/data.service';
-
+import { PopupComponent } from './components/popup/popup.component';
+declare var require:any;
+var Highcharts = require('highcharts');  
+// Load module after Highcharts is loaded
+require('highcharts/modules/exporting')(Highcharts); 
 
 
 @Component({
@@ -9,6 +13,9 @@ import { DataService } from './services/data.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  @ViewChild('popup') popup:PopupComponent
+  coordinates
+
   title = 'front';
   ready=false;
   dateList = [
@@ -36,6 +43,7 @@ export class AppComponent implements OnInit {
     this._dataService.getAllData().subscribe((res: any[]) => {
       this.ready=true
       setTimeout(()=>{
+        console.log(res[0])
         this.dataToDisplay = res
 
       },50)
@@ -51,6 +59,13 @@ export class AppComponent implements OnInit {
     return this.listType.find(x=>x.code == this.selectedTypeCode)
   }
 
+  coordinatesSelected(data){
+    console.log(data)
+    this.coordinates = data
+  }
 
+  openPopup() {
+    this.popup.open = true
+  }
 
 }

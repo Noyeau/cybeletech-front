@@ -8,13 +8,15 @@ import { MapComponent } from './components/map/map.component';
 import { FormsModule } from '@angular/forms';
 import { PopupComponent } from './components/popup/popup.component';
 import { DataService } from './services/data.service';
+import { GraphComponent } from './components/graph/graph.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    PopupComponent
+    PopupComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,

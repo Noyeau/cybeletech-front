@@ -5,6 +5,7 @@
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
+  "lang":"fr",
   "start_url": "./",
   "icons": [
     {

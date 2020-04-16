@@ -1,13 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand">Test Cybeletech</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="https://www.noyeau.io" target="_blank" >Fait par Antony Noyelle</a>
+        <a class="nav-link" href="https://www.noyeau.io" target="_blank">Fait par Antony Noyelle</a>
       </li>
     </ul>
   </div>
@@ -17,30 +18,39 @@
 
 
 <div class="block-ext">
-<div class="my-4">
-  <p>
-    Merci de sélectionner le type de mesure ainsi que la date souhaité.
-  </p>
-<div class="input-group mb-3">
+  <div class="my-4">
+    <p>
+      Sélectionnez le type de mesure ainsi que la date souhaité.
+    </p>
 
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3">Type de données</span>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">Date a afficher</span>
+      </div>
+      <select class="form-control" [(ngModel)]="selectedDate">
+        <option *ngFor="let date of dateList" [value]="date.date">{{date.label}} - {{date.date | date}}</option>
+      </select>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">Type de données</span>
+      </div>
+      <select class="form-control" [(ngModel)]="selectedTypeCode">
+        <option *ngFor="let type of listType" [value]="type.code">{{type.label}} </option>
+      </select>
+    </div>
+    <div class="row justify-content-center">
+      <app-map class="m-2" *ngIf="ready" [data]="dataToDisplay" [type]="getSelectedType()" [date]="selectedDate"
+      (selected)="coordinatesSelected($event)"></app-map>
+    <app-graph class="m-2" [type]="getSelectedType()" [data]="coordinates"></app-graph>
+    </div>
+    <div class="row justify-content-center">
+
+    
+    <button *ngIf="coordinates" (click)="openPopup()">Afficher toutes les infos</button>
   </div>
-  <select class="form-control" [(ngModel)]="selectedTypeCode">
-    <option *ngFor="let type of listType" [value]="type.code">{{type.label}} </option>
-  </select>
-</div>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3">Date a afficher</span>
+
   </div>
-  <select class="form-control" [(ngModel)]="selectedDate">
-    <option *ngFor="let date of dateList" [value]="date.date">{{date.label}} - {{date.date | date}}</option>
-  </select>
 </div>
-  
-
-  <app-map  *ngIf="ready" [data]="dataToDisplay" [type]="getSelectedType()" [date]="selectedDate"></app-map>
-</div>
-</div>
-
+<app-popup [test]="coordinates" #popup></app-popup>

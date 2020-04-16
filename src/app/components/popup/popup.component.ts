@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
+
+
 @Component({
   selector: 'app-popup',
   templateUrl: './popup.component.html',
@@ -11,11 +13,7 @@ export class PopupComponent implements OnInit {
   @Input() set test(value) {
     console.log(this.listType)
     this._test = value
-    if (value) {
-      this.open = true
-    } else {
-      this.open = false
-    }
+
   }
   get test() {
     return this._test
@@ -39,5 +37,8 @@ export class PopupComponent implements OnInit {
   getValue(date, type) {
     return date.values.find(x => x.type == type.code).value + type.unite
   }
+
+
+
 
 }

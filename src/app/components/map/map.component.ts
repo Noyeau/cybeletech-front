@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as L from 'leaflet';
 import { DataService } from 'src/app/services/data.service';
 
@@ -13,7 +13,7 @@ export class MapComponent implements OnInit {
   private _type = { label: "température à 2m", code: "t_2m:C", unite: "°C" }
 
   coordinatesSelected: any = null
-
+  @Output() selected: EventEmitter<any> = new EventEmitter()
   @Input() typeList;
 
   private _date
@@ -22,7 +22,7 @@ export class MapComponent implements OnInit {
     this._date = value
     console.log(value)
     if (this.map && this.data) {
-    this.updateData()
+      this.updateData()
     }
   }
   get date() {
@@ -62,22 +62,24 @@ export class MapComponent implements OnInit {
     this.clearData()
     this.dataCircle = this.data.map(x => {
       let thisValue;
-      if(!this.date){
+      if (!this.date) {
         thisValue = x.dates[0].values.find(y => y.type == this.type.code)
       } else {
-        if(x.dates.find(y => new Date(y.date).toDateString() == new Date(this.date).toDateString()))
-        thisValue = x.dates.find(y => new Date(y.date).toDateString() == new Date(this.date).toDateString()).values.find(y => y.type == this.type.code)
+        if (x.dates.find(y => new Date(y.date).toDateString() == new Date(this.date).toDateString()))
+          thisValue = x.dates.find(y => new Date(y.date).toDateString() == new Date(this.date).toDateString()).values.find(y => y.type == this.type.code)
       }
 
-        let circle = L.circle([x.lat, x.lon], {
-          opacity: 0.2,
-          color: this._dataService.getValueColor(thisValue),
-          fillColor: this._dataService.getValueColor(thisValue),
-          fillOpacity: 0.4,
-          radius: 5000
-        }).addTo(this.map);
+      let circle = L.circle([x.lat, x.lon], {
+        opacity: 0.2,
+        color: this._dataService.getValueColor(thisValue),
+        fillColor: this._dataService.getValueColor(thisValue),
+        fillOpacity: 0.4,
+        radius: 5000
+      }).addTo(this.map);
       circle.addEventListener('click', (event) => {
+        console.log(x)
         this.coordinatesSelected = x
+        this.selected.emit(x)
       })
       return circle
     })
@@ -91,10 +93,13 @@ export class MapComponent implements OnInit {
   }
 
   setMap() {
-    this.map = L.map('frugalmap').setView([46.9, 1.6], 6);
+    this.map = L.map('frugalmap',{
+      minZoom: 6,
+      maxZoom: 9
+  }).setView([46.9, 1.6], 6);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: 'Test'
+      attribution: 'Cybeletech'
     }).addTo(this.map);
 
   }

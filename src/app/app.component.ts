@@ -19,13 +19,13 @@ export class AppComponent implements OnInit {
   title = 'front';
   ready=false;
   dateList = [
-    {label : "j0", date: new Date()},
-    {label : "j+1", date: new Date(new Date().setDate(new Date().getDate()+1))},
-    {label : "j+2", date: new Date(new Date().setDate(new Date().getDate()+2))},
-    {label : "j+3", date: new Date(new Date().setDate(new Date().getDate()+3))},
-    {label : "j+4", date: new Date(new Date().setDate(new Date().getDate()+4))},
-    {label : "j+5", date: new Date(new Date().setDate(new Date().getDate()+5))},
-    {label : "j+6", date: new Date(new Date().setDate(new Date().getDate()+6))},
+    {label : "J0", date: new Date()},
+    {label : "J+1", date: new Date(new Date().setDate(new Date().getDate()+1))},
+    {label : "J+2", date: new Date(new Date().setDate(new Date().getDate()+2))},
+    {label : "J+3", date: new Date(new Date().setDate(new Date().getDate()+3))},
+    {label : "J+4", date: new Date(new Date().setDate(new Date().getDate()+4))},
+    {label : "J+5", date: new Date(new Date().setDate(new Date().getDate()+5))},
+    {label : "J+6", date: new Date(new Date().setDate(new Date().getDate()+6))},
   ]
   selectedDate = this.dateList[0].date;
 

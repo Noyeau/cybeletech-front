@@ -41,12 +41,10 @@ export class AppComponent implements OnInit {
       this.listType = res
     })
     this._dataService.getAllData().subscribe((res: any[]) => {
-      this.ready=true
+      this.dataToDisplay = res
       setTimeout(()=>{
-        console.log(res[0])
-        this.dataToDisplay = res
-
-      },50)
+        this.ready=true
+      },150)
       
     })
   }

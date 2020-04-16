@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { PopupComponent } from './components/popup/popup.component';
 import { DataService } from './services/data.service';
 import { GraphComponent } from './components/graph/graph.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { GraphComponent } from './components/graph/graph.component';
     AppComponent,
     MapComponent,
     PopupComponent,
-    GraphComponent
+    GraphComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

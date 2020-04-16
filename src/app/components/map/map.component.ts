@@ -98,7 +98,7 @@ export class MapComponent implements OnInit {
       maxZoom: 9
   }).setView([46.9, 1.6], 6);
 
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: 'Cybeletech'
     }).addTo(this.map);
 

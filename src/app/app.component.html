@@ -41,7 +41,7 @@
       </select>
     </div>
     <div class="row justify-content-center">
-      <app-map class="m-2" *ngIf="ready" [data]="dataToDisplay" [type]="getSelectedType()" [date]="selectedDate"
+      <app-map class="m-2" [data]="dataToDisplay" [type]="getSelectedType()" [date]="selectedDate"
       (selected)="coordinatesSelected($event)"></app-map>
     <app-graph class="m-2" [type]="getSelectedType()" [data]="coordinates"></app-graph>
     </div>
@@ -54,3 +54,4 @@
   </div>
 </div>
 <app-popup [test]="coordinates" #popup></app-popup>
+<app-loader *ngIf="!ready"></app-loader>

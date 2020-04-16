@@ -8,5 +8,10 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+//Forcer HTTPS
+if(window.location.href.includes('http://') && !window.location.href.includes('localhost')){
+  window.location.href = window.location.href.replace('http://','https://');
+} else {
+  platformBrowserDynamic().bootstrapModule(AppModule)
+    .catch(err => console.error(err));
+}

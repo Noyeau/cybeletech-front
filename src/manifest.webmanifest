@@ -1,8 +1,8 @@
 {
   "name": "Cybeletech Test",
   "short_name": "Cybeletech",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#146733",
+  "background_color": "#146733",
   "display": "standalone",
   "scope": "./",
   "lang":"fr",
